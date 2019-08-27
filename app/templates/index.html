@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+{% if request.user %}
+Welcome, {{ request.user.display_name }}!
+<img src="{{ request.user.photo_url }}">
+{% else %}
+<a href="/auth">Login</a>
+{% endif %}
+</body>
+</html>
