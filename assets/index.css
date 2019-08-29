@@ -1,0 +1,357 @@
+* {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    font-family: inherit;
+    text-decoration: none;
+    box-sizing: border-box;
+    outline-offset: 2px;
+    color: inherit;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    background-color: #0d2332;
+    
+    background-position: center top;
+    background-repeat: repeat-x;
+    background-size: 1500px 600px;
+
+    font-family: 'Roboto', sans-serif;
+
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    width: 100%;
+    color: #fff;
+    background: #705a8f;
+    padding: 6px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.headtext>span {
+    font-weight: 700;
+}
+
+.centre {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+}
+
+.title {
+    color: #9885b2;
+    font-size: 3.5em;
+    margin-bottom: 32px;
+}
+.heading {
+    color: #fff;
+    font-size: 3em;
+    margin-bottom: 8px;
+}
+.sheading {
+    color: #ccc;
+    font-size: 1.35em;
+    max-width: 800px;
+    margin: auto;
+}
+
+button {
+    border-radius: 4px;
+    text-align: center;
+    width: 470px;
+
+    background: #705a8f;
+    border: 2px solid #705a8f;
+    color: #fff;
+    font-size: 1.2em;
+    padding: 18px 34px 20px 34px;
+    margin-top: 16px;
+    cursor: pointer;
+
+    transition: color 1s ease, background-color 1s ease;
+}
+
+button.less {
+    border: 2px solid #705a8f;
+    background: transparent;
+}
+button:hover {
+    background-color: #5d4b77;
+}
+button.medium {
+    padding: 12px 24px;
+    width: 360px;
+    font-size: 1.1em;
+}
+button.small {
+    padding: 12px 12px;
+    width: 200px;
+    font-size: 1.1em;
+    border-radius: 3px;
+    border-width: 1px;
+}
+button.small.less {
+    color: #9885b2;
+}
+button.small.less:hover {
+    color: #fff;
+}
+
+button.tiny {
+    font-size: .8em;
+    background: #4f4065;
+    padding: 6px 16px;
+    width: auto;
+    border-radius: 3px;
+    margin: 0;
+    border: none;
+}
+button.tiny:hover {
+    background: #3d324e;
+}
+
+
+#listBody {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 24px;
+}
+#listMain {
+    text-align: center;
+    max-width: 1000px;
+    padding: 96px 16px;
+    width: 100%;
+    flex-shrink: 0;
+}
+#listButtons {
+    display: flex;
+    flex-direction: column;
+    padding-top: 24px;
+}
+
+#itemsModal {
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 82px;
+}
+.modalHead {
+    position: relative;
+    height: 100px;
+    border-radius: 10px 10px 0 0;
+    background-color: #5d4b77;
+    overflow: hidden;
+    width: 100%;
+}
+.modalHead::after {
+    content: "";
+    display: block;
+    position: absolute;
+    transform: rotate(-30deg) translate(-50%, -50%);
+    background: #705a8f;
+    width: 1000px;
+    height: 1000px;
+    left: 90%;
+    top: 50%;
+}
+.mhTitle {
+    position: absolute;
+    left: 24px;
+    top: 24px;
+    right: 24px;
+    text-align: left;
+    color: #fff;
+    font-size: 1.5em;
+    z-index: 1;
+}
+.mhOpts {
+    position: absolute;
+    left: 24px;
+    bottom: 16px;
+    right: 24px;
+    text-align: left;
+    z-index: 1;
+    font-size: 1.2em;
+    color: #ccc;
+}
+.mhOpts > * {
+    margin-right: 4px;
+}
+.mhOpts > .active {
+    color: #fff;
+}
+.modalBody {
+    width: 100%;
+    border-radius: 0 0 10px 10px;
+    background-color: #fff;
+    padding: 24px;
+}
+.ibItem {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.ibItem:last-child {
+    margin-bottom: 0;
+}
+.ibiMeta {
+    flex-grow: 1;
+    text-align: left;
+}
+.ibiScore {
+    font-size: 1.3em;
+    margin-left: 8px;
+    margin-right: 16px;
+    color: #6a829a;
+}
+.ibimTitle {
+    font-size: 2em;
+    color: #495b6c;
+}
+.ibimDesc {
+    color: #6a829a;
+    font-size: 1.3em;
+}
+
+.doots > * {
+    border: 15px solid transparent;
+    cursor: pointer;
+    opacity: .5;
+    transition: opacity 200ms ease;
+}
+.doots > .active {
+    opacity: 1;
+}
+.doots > :hover:not(.active) {
+    opacity: .9;
+}
+.downDoot {
+    margin-top: 6px;
+    margin-bottom: -15px;
+    border-top-color: #a55b3e;
+}
+.upDoot {
+    margin-top: -15px;
+    border-bottom-color: #448146;
+}
+
+#listBody::before {
+    display: block;
+    content: "";
+    width: 360px;
+}
+
+#ideaPopup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0006;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    opacity: 0;
+    z-index: 20;
+}
+.popupModal {
+    max-width: 900px;
+    width: 100%;
+    box-shadow: 0 0 80px #0006;
+    border-radius: 10px;
+}
+
+form.modalBody {
+    display: flex;
+    flex-direction: column;
+}
+
+input, textarea {
+    border: 2px solid #ccc;
+    width: 100%;
+    padding: 8px;
+    font-size: 1.4em;
+    margin-bottom: 16px;
+}
+.buttonRow {
+    display: flex;
+    justify-content: flex-end;
+}
+.buttonRow > * {
+    margin-left: 16px;
+    margin-top: 0;
+}
+
+:focus {
+    outline: thin dotted #bbc7d1;
+}
+.preload * {
+    transition: none !important;
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -ms-transition: none !important;
+    -o-transition: none !important;
+}
+
+
+@media only screen and (max-width: 1424px) {
+    #listBody {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+    #listBody::before {
+        display: none;
+    }
+    #listMain {
+        padding-top: 24px;
+    }
+    #listButtons {
+        width: 100%;
+        max-width: 1000px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    #listButtons > * {
+        margin-right: 16px;
+        margin-left: 16px;
+    }
+    #itemsModal {
+        margin-top: 24px;
+    }
+}
+@media only screen and (max-width: 850px) {
+    #listButtons button {
+        width: auto;
+        font-size: 1em;
+        padding: 8px;
+        margin: 4px;
+    }
+    .heading {
+        font-size: 2.5em;
+    }
+    .sheading {
+        font-size: 1.1em;
+    }
+    .ibimTitle {
+        font-size: 1.5em;
+    }
+    .ibimDesc {
+        font-size: 1.1em;
+    }
+    #listBody {
+        padding: 0;
+    }
+    #listMain {
+        padding-top: 12px;
+    }
+}

@@ -1,0 +1,32 @@
+{% macro button(text, link=None, classes='', id='') %}
+    {% if link %}<a href="{{ link }}">{% endif %}
+        <button id="{{ id }}" class="{{ classes }}">{{ text }}</button>
+    {% if link %}</a>{% endif %}
+{% endmacro %}
+
+{% macro make_header(user) %}
+    <header>
+        <div class="headtext">Logged in as <span>{{ user.name }}</span></div>
+        {{ button('Logout', url_for('logout'), 'tiny') }}
+    </header>
+{% endmacro %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}Lol title{% endblock %}</title>
+
+        <meta name="viewport" content="width=device-width, ititial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('assets', path='index.css') }}">
+    </head>
+
+    <body style="{% block bodystyle %}{% endblock %}" class="preload">
+        {% block body %}{% endblock %}
+
+        <script>
+            document.body.className = "";
+        </script>
+        {% block scripts %}{% endblock %}
+    </body>
+</html>

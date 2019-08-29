@@ -1,0 +1,14 @@
+{% extends "base.jinja" %}
+
+{% block bodystyle %}
+    background-image: url({{ url_for('assets', path='background.png') }});
+{% endblock %}
+
+{% block body %}
+    <div class="centre">
+        <div>
+            <div class="title">Activity Voting</div>
+            {{ button('Login to use this site', url_for('main')) }}
+        </div>
+    </div>
+{% endblock %}

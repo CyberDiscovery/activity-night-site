@@ -1,0 +1,109 @@
+{% extends "base.jinja" %}
+
+{% block body %}
+    {{ make_header(user) }}
+
+    <div id="listBody">
+        <div id="listMain">
+            <div class="heading">Friday Night Game</div>
+            <div class="sheading">here's some random text that nobody really cares about, but serves to nicely pad out the page</div>
+
+            <div id="itemsModal">
+                <div class="modalHead">
+                    <div class="mhTitle">Sort By</div>
+                    <div class="mhOpts">
+                        <a href="./new">New</a>
+                        <a class="active" href="./best">Best</a>
+                        <a href="./worst">Worst</a>
+                    </div>
+                </div>
+                <div class="modalBody">
+                    {% for item in items %}
+                    <div class="ibItem">
+                        <div class="doots">
+                            <div tabindex="0" class="upDoot{% if item.vote == 1 %} active {% endif %}"></div>
+                            <div tabindex="0" class="downDoot{% if item.vote == -1 %} active {% endif %}"></div>
+                        </div>
+                        <div class="ibiScore">{{ item.score }}</div>
+                        <div class="ibiMeta">
+                            <div class="ibimTitle">{{ item.name }}</div>
+                            <div class="ibimDesc">{{ item.desc }}</div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div id="listButtons">
+            {{ button('Submit New Idea', None, 'medium', id='newIdea') }}
+            {% if user.admin %}
+                {{ button('Manage Suggestions', None, 'medium less') }}
+                {{ button('Site Administration', None, 'medium less') }}
+            {% endif %}
+        </div>
+
+        <div id="ideaPopup">
+            <div class="popupModal">
+                <div class="modalHead">
+                    <div class="mhTitle">Submit New Idea</div>
+                </div>
+                <form method="POST" id="niForm" class="modalBody">
+                    <input placeholder="Title">
+                    <textarea rows="7" placeholder="Brief Description"></textarea>
+                    <div class='buttonRow'>
+                        {{ button('Cancel', None, 'small less', id='cancelBtn') }}
+                        {{ button('Submit', None, 'small', id='submitBtn') }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        const $ = q => document.querySelector(q);
+
+        const fade = (el, start, end, dur=300) => {
+            let op = start;
+            const startTime = (new Date()).getTime();
+            const stepFn = () => {
+                el.style.opacity = op;
+                op = start + (end - start) * (((new Date()).getTime() - startTime) / dur) 
+                if ((end >= start && op >= end) || (end < start && op <= end)) {
+                    el.style.opacity = end;  
+                    if (end === 0)
+                        el.style.display = 'none';
+                } else requestAnimationFrame(stepFn);
+            };
+            requestAnimationFrame(stepFn); 
+        };
+
+        const ip = $("#ideaPopup");
+        $("#newIdea").onclick = e => {
+            ip.style.display = "flex";
+            fade(ip, 0, 1);
+
+            e.preventDefault();
+            return false;
+        };
+
+        ip.onclick = e => {
+            if (e.target == ip) {
+                fade(ip, 1, 0, 200);
+                e.preventDefault();
+                return false;
+            }
+        }
+        $("#cancelBtn").onclick = e => {
+            fade(ip, 1, 0, 200);
+            e.preventDefault();
+            return false;
+        }
+        $("#submitBtn").onclick = e => {
+            $("#niForm").submit();
+            e.preventDefault();
+            return false;
+        }
+    </script>
+{% endblock %}
