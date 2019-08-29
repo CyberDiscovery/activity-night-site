@@ -9,52 +9,43 @@
             <div class="sheading">here's some random text that nobody really cares about, but serves to nicely pad out the page</div>
 
             <div id="itemsModal">
-                <div class="modalHead">
-                    <div class="mhTitle">Sort By</div>
-                    <div class="mhOpts">
-                        <a href="./new">New</a>
-                        <a class="active" href="./best">Best</a>
-                        <a href="./worst">Worst</a>
-                    </div>
-                </div>
-                <div class="modalBody">
+                {% call modal('Sort By', [('New', './new', 0), ('Best', './best', 1), ('Worst', './worst', 0)]) %}
                     {% for item in items %}
-                    <div class="ibItem">
-                        <div class="doots">
-                            <div tabindex="0" class="upDoot{% if item.vote == 1 %} active {% endif %}"></div>
-                            <div tabindex="0" class="downDoot{% if item.vote == -1 %} active {% endif %}"></div>
+                        <div class="ibItem">
+                            <div class="doots">
+                                <div tabindex="0" class="upDoot{% if item.vote == 1 %} active {% endif %}"></div>
+                                <div tabindex="0" class="downDoot{% if item.vote == -1 %} active {% endif %}"></div>
+                            </div>
+                            <div class="ibiScore">{{ item.score }}</div>
+                            <div class="ibiMeta">
+                                <div class="ibimTitle">{{ item.name }}</div>
+                                <div class="ibimDesc">{{ item.desc }}</div>
+                            </div>
                         </div>
-                        <div class="ibiScore">{{ item.score }}</div>
-                        <div class="ibiMeta">
-                            <div class="ibimTitle">{{ item.name }}</div>
-                            <div class="ibimDesc">{{ item.desc }}</div>
-                        </div>
-                    </div>
                     {% endfor %}
-                </div>
+                {% endcall %}
             </div>
         </div>
         <div id="listButtons">
             {{ button('Submit New Idea', None, 'medium', id='newIdea') }}
             {% if user.admin %}
                 {{ button('Manage Suggestions', None, 'medium less') }}
-                {{ button('Site Administration', None, 'medium less') }}
+                {{ button('Site Administration', '/admin', 'medium less') }}
             {% endif %}
         </div>
 
         <div id="ideaPopup">
             <div class="popupModal">
-                <div class="modalHead">
-                    <div class="mhTitle">Submit New Idea</div>
-                </div>
-                <form method="POST" id="niForm" class="modalBody">
-                    <input placeholder="Title">
-                    <textarea rows="7" placeholder="Brief Description"></textarea>
-                    <div class='buttonRow'>
-                        {{ button('Cancel', None, 'small less', id='cancelBtn') }}
-                        {{ button('Submit', None, 'small', id='submitBtn') }}
-                    </div>
-                </form>
+                {% call modal('Submit New Idea', []) %}
+                    <form method="POST" id="niForm">
+                        <input placeholder="Title">
+                        <textarea rows="7" placeholder="Brief Description"></textarea>
+                        <div class='buttonRow'>
+                            {{ button('Cancel', None, 'small less', id='cancelBtn') }}
+                            {{ button('Submit', None, 'small', id='submitBtn') }}
+                        </div>
+                    </form>
+                {% endcall %}
             </div>
         </div>
     </div>

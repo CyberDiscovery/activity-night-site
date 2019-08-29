@@ -1,6 +1,6 @@
-{% macro button(text, link=None, classes='', id='') %}
+{% macro button(text, link=None, classes='', id='', type=None) %}
     {% if link %}<a href="{{ link }}">{% endif %}
-        <button id="{{ id }}" class="{{ classes }}">{{ text }}</button>
+        <button id="{{ id }}" class="{{ classes }}"{% if type %}type="{{ type }}"{% endif %}>{{ text }}</button>
     {% if link %}</a>{% endif %}
 {% endmacro %}
 
@@ -9,6 +9,27 @@
         <div class="headtext">Logged in as <span>{{ user.name }}</span></div>
         {{ button('Logout', url_for('logout'), 'tiny') }}
     </header>
+{% endmacro %}
+
+{% macro checkbox(title, state, name) %}
+    <label class="checkbox">{{ title }}
+        <input name="{{ name }}" type="checkbox"{% if state %} checked="checked"{% endif %}>
+        <span class="checkmark"></span>
+    </label>
+{% endmacro %}
+
+{% macro modal(title, links) %}
+    <div class="modalHead">
+        <div class="mhTitle">{{ title }}</div>
+        <div class="mhOpts">
+            {% for i in links %}
+                <a {% if i[2] %}class="active"{% endif %} href="{{ i[1] }}">{{ i[0] }}</a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="modalBody">
+        {{ caller() }}
+    </div>
 {% endmacro %}
 
 <!DOCTYPE html>

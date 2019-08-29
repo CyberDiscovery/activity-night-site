@@ -1,0 +1,24 @@
+{% extends "base.jinja" %}
+
+{% block body %}
+    {{ make_header(user) }}
+
+    <div class="fpModal">
+        {% call modal('Side Administration', [('Back to site', '/', 0)]) %}
+            <form method="POST" id="niForm">
+
+                {{ checkbox('Site Open', True, 'active') }}
+                {{ checkbox('Accepting New Submissions', True, 'active') }}
+                {{ checkbox('Voting Enabled', True, 'active') }}
+
+                <input placeholder="Voting Title" value="Friday Night Game">
+                <textarea rows="7" placeholder="Voting Description">here's some random text that nobody really cares about, but serves to nicely pad out the page</textarea>
+
+                <div class='buttonRow'>
+                    {{ button('Clear All Submissions', '/admin/clear', 'small less warning', id='clearBtn', type='button') }}
+                    {{ button('Save Changes', None, 'small', id='submitBtn') }}
+                </div>
+            </form>
+        {% endcall %}
+    </div>
+{% endblock %}

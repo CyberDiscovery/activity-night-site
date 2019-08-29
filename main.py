@@ -14,6 +14,10 @@ def index():
 def logout():
     return redirect('/')
 
+@app.route('/admin')
+def admin():
+    return render_template('admin.jinja', user=dict(name='Bottersnike', admin=True))
+
 @app.route('/main/')
 def main():
     return render_template('main.jinja', items=[
